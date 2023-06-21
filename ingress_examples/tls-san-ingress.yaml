@@ -1,0 +1,66 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: tls-foo
+  annotations: {
+    "virtual-server-ip" : "172.23.133.15",
+    "virtual-server-port" : "",
+    "virtual-server-interface" : "port1",
+    "fortiadc-ctrl-log" : "enable",
+    "fortiadc-ip" : "10.0.100.133",
+    "fortiadc-login" : "fad-login",
+    "load-balance-method" : "LB_METHOD_LEAST_CONNECTION",
+    "fortiadc-vdom" : "root"
+  }
+spec:
+  ingressClassName: fadc-ingress-controller 
+  tls:
+  - hosts:
+      - a.foo.com
+      - b.foo.com
+      - c.foo.com
+    secretName: tls-foo
+  - hosts:
+      - https-example.foo.com
+    secretName: testsecret-tls
+  rules:
+  - host: a.foo.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: default-http-backend
+            port:
+              number: 80
+  - host: b.foo.com
+    http:
+      paths:
+      - path: /env
+        pathType: Exact
+        backend:
+          service:
+            name: service1
+            port:
+              number: 1241
+  - host: c.foo.com
+    http:
+      paths:
+      - path: /info
+        pathType: Prefix
+        backend:
+          service:
+            name: service1
+            port:
+              number: 1241
+  - host: https-example.foo.com
+    http:
+      paths:
+      - path: /hello
+        pathType: Prefix
+        backend:
+          service:
+            name: service2
+            port:
+              number: 1242

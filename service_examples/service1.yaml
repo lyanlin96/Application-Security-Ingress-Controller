@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-sise
+  labels:
+    run: my-sise
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        run: sise
+    spec:
+      containers:
+        - name: sise
+          image: mhausenblas/simpleservice:0.5.0
+          ports:
+            - containerPort: 9876
+              name: sise-default
+  selector:
+    matchLabels:
+      run: sise
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: service1
+  namespace: default
+  annotations: {
+    "health-check-ctrl" : "enable",
+    "health-check-relation" : "OR",
+    "health-check-list" : "LB_HLTHCK_ICMP",
+    "real-server-ssl-profile" : "NONE"
+  }
+spec:
+  type: NodePort
+  ports:
+  - port: 1241
+    protocol: TCP
+    targetPort: 9876
+  selector:
+    run: sise
+  sessionAffinity: None

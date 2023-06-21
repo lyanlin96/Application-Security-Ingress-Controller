@@ -1,0 +1,35 @@
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  labels:
+    name: fad-app
+  name: fad-demo-app
+  namespace: fadgw
+  annotations: {
+        "ingress-controller" : "fadc-ingress-controller",
+        "fortiadc-ip" : "172.23.133.171",
+        "fortiadc-login" : "fad-login",
+        "fortiadc-vdom" : "root",
+        "fortiadc-ctrl-log" : "enable",
+        "virtual-server-ip" : "10.0.0.104",
+        "virtual-server-interface" : "port2",
+        "virtual-server-port" : "443",
+        "load-balance-method" : "LB_METHOD_LEAST_CONNECTION",
+        "load-balance-profile" : "LB_PROF_HTTPS"
+  }
+spec:
+  host: testtlsroute.com
+  path: "/info"
+  port:
+    targetPort: 1234-tcp
+  tls:
+    certificate: |
+      -----BEGIN CERTIFICATE-----
+      -----END CERTIFICATE-----
+    key: |
+      -----BEGIN PRIVATE KEY-----
+      -----END PRIVATE KEY-----
+    termination: edge
+  to:
+    kind: Service
+    name: fad-app

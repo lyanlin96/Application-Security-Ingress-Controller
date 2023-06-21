@@ -1,0 +1,56 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-web
+  labels:
+    run: my-web
+  annotations: {
+    "health-check-ctrl" : "enable",
+    "health-check-relation" : "OR",
+    "health-check-list" : "LB_HLTHCK_HTTPS",
+    "real-server-ssl-profile" : "LB_RS_SSL_PROF_HIGH",
+    "overlay_tunnel" : "k8s",
+  }
+spec:
+  ports:
+  - port: 443
+    protocol: TCP
+    name: https
+    targetPort: https
+  selector:
+    app: my-web
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-web
+spec:
+  selector:
+    matchLabels:
+      app: my-web
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: my-web
+    spec:
+      volumes:
+      - name: secret-volume
+        secret:
+          secretName: nginxsecret
+      - name: configmap-volume
+        configMap:
+          name: nginxconfigmap
+      containers:
+      - name: nginxhttps
+        image: nginx
+        ports:
+        - containerPort: 443
+          name: https
+        - containerPort: 80
+          name: http
+        volumeMounts:
+        - mountPath: /etc/nginx/ssl
+          name: secret-volume
+        - mountPath: /etc/nginx/conf.d
+          name: configmap-volume

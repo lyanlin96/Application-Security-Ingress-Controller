@@ -1,0 +1,68 @@
+kind: ClusterRole
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: {{ include "fadc-k8s-ctrl.serviceAccountName" . }}
+rules:
+- apiGroups: [""]
+  resources: ["pods", "services", "nodes", "endpoints", "secrets"]
+  verbs: ["get", "watch", "list", "update"]
+- apiGroups:
+  - networking.k8s.io
+  resources:
+  - ingresses
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - networking.k8s.io
+  resources:
+  - ingressclasses
+  verbs:
+  - get
+  - list
+- apiGroups:
+  - networking.k8s.io
+  resources:
+  - ingresses/status
+  verbs:
+  - update
+- apiGroups:
+  - extensions
+  resources:
+  - ingresses/status
+  verbs:
+  - update
+{{- if eq .Values.parameters.openshiftRouteSupport "yes" }}
+- apiGroups:
+  - route.openshift.io
+  resources:
+  - routes
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - route.openshift.io
+  resources:
+  - routes/status
+  verbs:
+  - get
+  - list
+  - watch
+  - update
+{{- end }}
+
+---
+kind: ClusterRoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: {{ include "fadc-k8s-ctrl.serviceAccountName" . }}
+subjects:
+- kind: ServiceAccount
+  name: {{ include "fadc-k8s-ctrl.serviceAccountName" . }}
+  namespace: {{ .Release.Namespace }}
+roleRef:
+  kind: ClusterRole
+  name: {{ include "fadc-k8s-ctrl.serviceAccountName" . }}
+  apiGroup: rbac.authorization.k8s.io

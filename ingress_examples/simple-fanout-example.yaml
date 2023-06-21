@@ -1,0 +1,36 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: simple-fanout-example
+  annotations: {
+    "fortiadc-ip" : "10.0.100.133",
+    "fortiadc-login" : "fad-login",
+    "fortiadc-vdom" : "root",
+    "fortiadc-ctrl-log" : "enable",
+    "virtual-server-ip" : "172.23.133.6",
+    "virtual-server-interface" : "port1",    
+    "virtual-server-port" : "443",
+    "load-balance-method" : "LB_METHOD_LEAST_CONNECTION",
+    "load-balance-profile" : "LB_PROF_HTTPS"
+  }
+spec:
+  ingressClassName: fadc-ingress-controller
+  rules:
+  - host: test.com
+    http:
+      paths:
+      - path: /info
+        pathType: Prefix
+        backend:
+          service:
+            name: service1
+            port:
+              number: 1241
+      - path: /hello
+        pathType: Prefix
+        backend:
+          service:
+            name: service2
+            port:
+              number: 1242
+

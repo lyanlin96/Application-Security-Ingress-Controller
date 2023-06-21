@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: simple-web
+  labels:
+    run: simple-web
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        run: simple-web
+    spec:
+      containers:
+        - name: simple-web
+          image: yeasy/simple-web
+          ports:
+            - containerPort: 80
+              name: http
+  selector:
+    matchLabels:
+      run: simple-web
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: service3
+  namespace: default
+  annotations: {
+    "health-check-ctrl" : "enable",
+    "health-check-relation" : "OR",
+    "health-check-list" : "LB_HLTHCK_ICMP",
+    "real-server-ssl-profile" : "NONE",
+    "overlay_tunnel" : "k8s"
+  }
+spec:
+  ports:
+  - port: 1245
+    protocol: TCP
+    targetPort: 80
+  selector:
+    run: simple-web
+  sessionAffinity: None

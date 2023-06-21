@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Node
+metadata:
+  name: fad
+  labels:
+    topology.kubernetes.io/zone: "fake-node"
+  annotations:
+    #Replace public-ip with outgoing interface IP of overlay tunnel
+    flannel.alpha.coreos.com/public-ip: "10.0.100.133"
+    #Replace VtepMAC with your VXLAN interface MAC
+    flannel.alpha.coreos.com/backend-data: '{"VNI":1,"VtepMAC":"e4:74:eb:7c:c7:xx"}'
+    flannel.alpha.coreos.com/backend-type: "vxlan"
+    flannel.alpha.coreos.com/kube-subnet-manager: "true"
+spec:
+  podCIDR: "10.244.30.0/24"

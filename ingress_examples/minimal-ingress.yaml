@@ -1,0 +1,42 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: minimal-ingress
+  annotations: {
+    "fortiadc-ip" : "10.0.100.133",
+    "fortiadc-login" : "fad-login",
+    "fortiadc-ctrl-log" : "enable",
+    "fortiadc-vdom" : "root",
+    "virtual-server-ip" : "172.23.133.8",
+    "virtual-server-interface" : "port1",
+    "virtual-server-port" : "443",
+    "virtual-server-addr-type" : "ipv4",
+    "virtual-server-waf-profile" : "High-Level-Security",
+    "virtual-server-av-profile" : "Antivirus-Profile",
+    "virtual-server-dos-profile" : "",
+    "virtual-server-captcha-profile" : "LB_CAPTCHA_PROFILE_DEFAULT",
+    "virtual-server-nat-src-pool" : "",
+    "virtual-server-traffic-group" : "default",
+    "virtual-server-fortiview" : "enable",
+    "virtual-server-traffic-log" : "enable",
+    "virtual-server-wccp" : "enable",
+    "load-balance-method" : "LB_METHOD_LEAST_CONNECTION",
+    "load-balance-profile" : "LB_PROF_HTTPS",
+    "virtual-server-fortigslb-publicip-type" : "ipv4",
+    "virtual-server-fortigslb-publicip" : "192.0.2.1",
+    "virtual-server-fortigslb-1clickgslb" : "disable",
+    "virtual-server-fortigslb-hostname" : "www",
+    "virtual-server-fortigslb-domainname" : "example.com."
+  }
+spec:
+  ingressClassName: fadc-ingress-controller
+  rules:
+  - http:
+      paths:
+      - path: /info
+        pathType: Prefix
+        backend:
+          service:
+            name: service1
+            port:
+              number: 1241

@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: fadgw
+  annotations:
+    k8s.ovn.org/hybrid-overlay-external-gw: 10.132.100.10
+    k8s.ovn.org/hybrid-overlay-vtep: 172.23.133.171 #replace this with your simulated  ip

@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fad-app
+  namespace: fadgw
+  labels:
+    app: fad-app
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      deployment: fad-app
+  template:
+    metadata:
+      labels:
+        deployment: fad-app
+    spec:
+      containers:
+      - env:
+        - name: service_name
+          value: fad-app
+        - name: WORD
+          value: "HELLO app 1!!"
+        image: hsandy123/simpleserver:1.0.0-004
+        imagePullPolicy: Always
+        name: fad-app
+        ports:
+        - containerPort: 1234
+          protocol: TCP
+        securityContext:
+            allowPrivilegeEscalation: false
+            runAsNonRoot: true
+            seccompProfile:
+                type: RuntimeDefault
+            capabilities:
+                drop: ["ALL"]

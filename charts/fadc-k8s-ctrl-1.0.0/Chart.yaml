@@ -1,0 +1,7 @@
+apiVersion: v2
+name: fadc-k8s-ctrl
+version: 1.0.0
+kubeVersion: ">= 1.19.8-0, <= 1.23-0"
+description: A Helm chart for FortiADC Ingress Controller
+type: application
+appVersion: "1.0.0"

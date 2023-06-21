@@ -1,0 +1,41 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-with-default-backend
+  annotations: {
+    "virtual-server-ip" : "172.23.133.65",
+    "virtual-server-interface" : "port1",
+    "fortiadc-ip" : "10.0.100.133",
+    "fortiadc-login" : "fad-login",
+    "fortiadc-vdom" : "root"
+  }
+
+spec:
+  ingressClassName: fadc-ingress-controller
+  defaultBackend:
+    service:
+      name: default-http-backend
+      port:
+        number: 80
+  rules:
+  - host: "foo.bar.com"
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/info"
+        backend:
+          service:
+            name: service1
+            port:
+              number: 1241
+  - host: "*.foo.com"
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/hello"
+        backend:
+          service:
+            name: service2
+            port:
+              number: 1242
+

@@ -1,0 +1,68 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "fadc-k8s-ctrl.fullname" . }}
+  labels:
+    {{- include "fadc-k8s-ctrl.labels" . | nindent 4 }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      {{- include "fadc-k8s-ctrl.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "fadc-k8s-ctrl.selectorLabels" . | nindent 8 }}
+    spec:
+      serviceAccountName: {{ .Values.serviceAccount.name }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      containers:
+        - name: {{ .Chart.Name }}
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          {{- if eq .Values.parameters.openshiftRouteSupport "yes" }}
+          securityContext:
+              allowPrivilegeEscalation: false
+              runAsNonRoot: true
+              seccompProfile:
+                  type: RuntimeDefault
+              capabilities:
+                  drop: ["ALL"]
+          {{- end }}
+          env:
+          - name: VirtualServerNatSrcPool
+            value: {{ .Values.parameters.virtualServerNatSrcPool }}
+          - name: VirtualServerWafProfile
+            value: {{ .Values.parameters.virtualServerWafProfile }}
+          - name: VirtualServerAvProfile
+            value: {{ .Values.parameters.virtualServerAvProfile }}
+          - name: VirtualServerDosProfile
+            value: {{ .Values.parameters.virtualServerDosProfile }}
+          - name: VirtualServerCaptchaProfile
+            value: {{ .Values.parameters.virtualServerCaptchaProfile }}
+          - name: VirtualServerPersistence
+            value: {{ .Values.parameters.virtualServerPersistence }}
+          - name: VirtualServerFortiGSLB
+            value: {{ .Values.parameters.virtualServerFortiGSLB }}
+          - name: OpenShiftRouteSupport
+            value: "{{ .Values.parameters.openshiftRouteSupport }}"
+
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
