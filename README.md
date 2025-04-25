@@ -1,7 +1,7 @@
 
 # Application Security Ingress Controller
 Below content is the basic know-how and quick start for an Application Security Ingress Controller.
-For more much details, please refer to the [official document](https://docs.fortinet.com/document/fortiadc/latest/fortiadc-ingress-controller-1-0/).
+
 
 </br>
 </br>
