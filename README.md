@@ -1,13 +1,13 @@
 
 # Application Security Ingress Controller
 Below content is the basic know-how and quick start for an Application Security Ingress Controller.
-For more much details, please refer to the [official document](https://docs.fortinet.com/document/Application Security/latest/Application Security-ingress-controller-1-0/).
+For more much details, please refer to the [official document](https://docs.fortinet.com/document/Application Security/latest/fortiadc-ingress-controller-1-0/).
 
 </br>
 </br>
 </br>
 
-![Application Security Ingress Controller Overview](https://github.com/fortinet/Application Security-ingress/blob/main/figures/fadc-ingress-controller-overview.png?raw=true)
+![Application Security Ingress Controller Overview](https://github.com/fortinet/fortiadc-ingress/blob/main/figures/fadc-ingress-controller-overview.png?raw=true)
 
 The Application Security Ingress Controller fulfills the Kubernetes Ingress resources and allows you to manage Application Security objects from Kubernetes. It is deployed in a container of a pod in a Kubernetes cluster. The list below outlines the major functionalities of the Application Security Ingress Controller: 
 
@@ -16,7 +16,7 @@ The Application Security Ingress Controller fulfills the Kubernetes Ingress reso
  - To handle Add/Update/Delete events for watched Ingress resources and automatically implement corresponding actions on Application Security.
  
  
- ![Ingress](https://github.com/fortinet/Application Security-ingress/blob/main/figures/ingress.png?raw=true)
+ ![Ingress](https://github.com/fortinet/fortiadc-ingress/blob/main/figures/ingress.png?raw=true)
 
 Ingress is a Kubernetes object that manages the external access to services in a Kubernetes cluster (typically HTTP/HTTPS). Ingress may provide load-balancing, SSL termination and name-based virtual hosting.
 
@@ -203,7 +203,7 @@ Configuration parameters are required to be specified in the Ingress annotation 
 
 # Deployment of a Simple-fanout Ingress Example
 
-![Simple-fanout example](https://github.com/fortinet/Application Security-ingress/blob/main/figures/simple-fanout.png?raw=true)
+![Simple-fanout example](https://github.com/fortinet/fortiadc-ingress/blob/main/figures/simple-fanout.png?raw=true)
 
 In this example, the client can access service1 with the URL https://test.com/info and access service2 with the
 URL https://test.com/hello.
@@ -215,17 +215,17 @@ Services are deployed under the namespace default.
 
 Service1:
 
-    kubectl apply -f https://raw.githubusercontent.com/fortinet/Application Security-ingress/main/service_examples/service1.yaml
+    kubectl apply -f https://raw.githubusercontent.com/fortinet/fortiadc-ingress/main/service_examples/service1.yaml
 Service2:
 
-    kubectl apply -f https://raw.githubusercontent.com/fortinet/Application Security-ingress/main/service_examples/service2.yaml
+    kubectl apply -f https://raw.githubusercontent.com/fortinet/fortiadc-ingress/main/service_examples/service2.yaml
 
 ## Deploy the Ingress
 
 Download the simple-fanout-example.yaml
 
 
-    curl -k https://raw.githubusercontent.com/fortinet/Application Security-ingress/main/ingress_examples/simple-fanout-example.yaml -o simple-fanout-example.yaml
+    curl -k https://raw.githubusercontent.com/fortinet/fortiadc-ingress/main/ingress_examples/simple-fanout-example.yaml -o simple-fanout-example.yaml
 
 Modify the Ingress Annotation in simple-fanout-example.yaml to accommodate to your environment, ex: Application Security-ip, virtual-server-ip, etc.. Then deploy the ingress with kubectl command
 
@@ -235,13 +235,13 @@ Modify the Ingress Annotation in simple-fanout-example.yaml to accommodate to yo
 
 Check the deployed Ingress with FortiView
 
-![fortiview_topology](https://github.com/fortinet/Application Security-ingress/blob/main/figures/fortiview_topology.png?raw=true)
+![fortiview_topology](https://github.com/fortinet/fortiadc-ingress/blob/main/figures/fortiview_topology.png?raw=true)
 
 Try to access https://test.com/info.
 
-![test_info](https://github.com/fortinet/Application Security-ingress/blob/main/figures/test_info.png?raw=true)
+![test_info](https://github.com/fortinet/fortiadc-ingress/blob/main/figures/test_info.png?raw=true)
 
 Try to access https://test.com/hello.
 
-![nginx-demo](https://github.com/fortinet/Application Security-ingress/blob/main/figures/nginx-demo.png?raw=true)
+![nginx-demo](https://github.com/fortinet/fortiadc-ingress/blob/main/figures/nginx-demo.png?raw=true)
 
