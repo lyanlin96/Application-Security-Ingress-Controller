@@ -1,7 +1,7 @@
 
 # Application Security Ingress Controller
 Below content is the basic know-how and quick start for an Application Security Ingress Controller.
-For more much details, please refer to the [official document](https://docs.fortinet.com/document/Application Security/latest/fortiadc-ingress-controller-1-0/).
+For more much details, please refer to the [official document](https://docs.fortinet.com/document/fortiadc/latest/fortiadc-ingress-controller-1-0/).
 
 </br>
 </br>
@@ -60,7 +60,7 @@ Application Security, as the Ingress-managed load balancer, not only provides fl
 </table>
 
 >**Note** 
->Some features for Application Security Ingress Controller version >= 2.0.0 require Application Security version >= 7.4.0 to support. Please check the [release notes](https://github.com/fortinet/Application Security-ingress/blob/main/Release-Notes.md).
+>Some features for Application Security Ingress Controller version >= 2.0.0 require Application Security version >= 7.4.0 to support. 
 ## Supported Environment
 The Application Security Ingress Controller has been verified to run in the Openshift Cluster in Openshift Container Platform environment and Kubernetes cluster in the below environments:
 | Environment | Tools for Building |
