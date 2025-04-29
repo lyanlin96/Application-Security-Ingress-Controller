@@ -1,29 +1,33 @@
 # Application Security Ingress Controller
 🛡️ Application Security Ingress Controller
 </br>
+Application Security Ingress Controller is an open-source Kubernetes ingress controller that combines advanced security controls with AI-powered threat detection to safeguard microservices, APIs, and web applications in cloud-native environments.
 
-Application Security Ingress Controller is an open-source Kubernetes ingress controller that integrates advanced application-layer security features such as WAF (Web Application Firewall), rate limiting, IP reputation filtering, and OWASP Top 10 protections—designed to safeguard microservices and APIs in cloud-native environments.
-
-🚀 Features
+🚀 Key Features
 </br>
+🔐 WAF Integration – Protects against OWASP Top 10 vulnerabilities (SQLi, XSS, etc.) using ModSecurity or customizable security rules
 
-🔐 WAF Integration – Protects against OWASP Top 10 vulnerabilities (SQLi, XSS, etc.) using ModSecurity or custom rules
-</br>
+📈 Rate Limiting & Bot Management – Detects and throttles abusive or automated traffic
 
-📈 Rate Limiting – Granular control to mitigate DDoS and abusive traffic
-</br>
+🌍 IP Reputation & Threat Intelligence – Real-time blocking of high-risk IPs based on global threat feeds
 
-🌍 IP Reputation Filtering – Block malicious traffic from known bad IPs and geolocations
-</br>
+🧠 AI-Based Anomaly Detection – Machine learning models analyze traffic patterns to identify and block suspicious behaviors (e.g., credential stuffing, application-layer DDoS)
 
-🧠 Security Rules Engine – Declarative policy enforcement using CRDs (Custom Resource Definitions)
-</br>
+🤖 Adaptive Security Policies – Dynamically adjust rules and thresholds based on live traffic analysis
 
-🧰 Plug-and-Play – Easily integrates with NGINX, Envoy, or Traefik-based ingress setups
-</br>
+🧰 Plug-and-Play – Works with NGINX, Envoy, or Traefik ingress controllers
 
-☁️ Cloud-Native Ready – Built for Kubernetes, compatible with popular service meshes (Istio, Linkerd)
+☁️ Cloud-Native & Service Mesh Friendly – Built for Kubernetes, compatible with Istio, Linkerd, and other service meshes
+
+🧠 How AI Enhances Security
 </br>
+Traffic Anomaly Detection: Identifies unusual request patterns without predefined signatures
+
+Zero-Day Attack Defense: Uses behavior-based learning to detect novel attacks early
+
+Intelligent Rate Control: Adapts rate limits based on real-time risk scoring
+
+Self-Learning Models: Continuously improves detection accuracy with minimal manual tuning
 
 🔧 Use Cases
 </br>
