@@ -1,20 +1,33 @@
+# Application Security Ingress Controller
 🛡️ Application Security Ingress Controller
+</br>
+
 Application Security Ingress Controller is an open-source Kubernetes ingress controller that integrates advanced application-layer security features such as WAF (Web Application Firewall), rate limiting, IP reputation filtering, and OWASP Top 10 protections—designed to safeguard microservices and APIs in cloud-native environments.
 
 🚀 Features
+</br>
+
 🔐 WAF Integration – Protects against OWASP Top 10 vulnerabilities (SQLi, XSS, etc.) using ModSecurity or custom rules
+</br>
 
 📈 Rate Limiting – Granular control to mitigate DDoS and abusive traffic
+</br>
 
 🌍 IP Reputation Filtering – Block malicious traffic from known bad IPs and geolocations
+</br>
 
 🧠 Security Rules Engine – Declarative policy enforcement using CRDs (Custom Resource Definitions)
+</br>
 
 🧰 Plug-and-Play – Easily integrates with NGINX, Envoy, or Traefik-based ingress setups
+</br>
 
 ☁️ Cloud-Native Ready – Built for Kubernetes, compatible with popular service meshes (Istio, Linkerd)
+</br>
 
 🔧 Use Cases
+</br>
+
 Securing public-facing APIs and web apps in production
 
 Adding L7 security to Kubernetes ingress with minimal configuration
@@ -26,8 +39,9 @@ Blocking known botnets or abusive crawlers
 Enhancing compliance posture (e.g., PCI-DSS, HIPAA)
 
 📦 Architecture
+</br>
+
 The controller intercepts ingress traffic at L7 (HTTP/S), applies user-defined or default security policies, and forwards only clean traffic to backend services. It supports both inline and sidecar deployment modes.
-# Application Security Ingress Controller
 Below content is the basic know-how and quick start for an Application Security Ingress Controller.
 
 
