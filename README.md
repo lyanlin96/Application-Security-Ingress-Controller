@@ -1,4 +1,32 @@
+🛡️ Application Security Ingress Controller
+Application Security Ingress Controller is an open-source Kubernetes ingress controller that integrates advanced application-layer security features such as WAF (Web Application Firewall), rate limiting, IP reputation filtering, and OWASP Top 10 protections—designed to safeguard microservices and APIs in cloud-native environments.
 
+🚀 Features
+🔐 WAF Integration – Protects against OWASP Top 10 vulnerabilities (SQLi, XSS, etc.) using ModSecurity or custom rules
+
+📈 Rate Limiting – Granular control to mitigate DDoS and abusive traffic
+
+🌍 IP Reputation Filtering – Block malicious traffic from known bad IPs and geolocations
+
+🧠 Security Rules Engine – Declarative policy enforcement using CRDs (Custom Resource Definitions)
+
+🧰 Plug-and-Play – Easily integrates with NGINX, Envoy, or Traefik-based ingress setups
+
+☁️ Cloud-Native Ready – Built for Kubernetes, compatible with popular service meshes (Istio, Linkerd)
+
+🔧 Use Cases
+Securing public-facing APIs and web apps in production
+
+Adding L7 security to Kubernetes ingress with minimal configuration
+
+Integrating custom security policies into CI/CD pipelines
+
+Blocking known botnets or abusive crawlers
+
+Enhancing compliance posture (e.g., PCI-DSS, HIPAA)
+
+📦 Architecture
+The controller intercepts ingress traffic at L7 (HTTP/S), applies user-defined or default security policies, and forwards only clean traffic to backend services. It supports both inline and sidecar deployment modes.
 # Application Security Ingress Controller
 Below content is the basic know-how and quick start for an Application Security Ingress Controller.
 
@@ -7,7 +35,6 @@ Below content is the basic know-how and quick start for an Application Security 
 </br>
 </br>
 
-![Application Security Ingress Controller Overview](https://github.com/fortinet/fortiadc-ingress/blob/main/figures/fadc-ingress-controller-overview.png?raw=true)
 
 The Application Security Ingress Controller fulfills the Kubernetes Ingress resources and allows you to manage Application Security objects from Kubernetes. It is deployed in a container of a pod in a Kubernetes cluster. The list below outlines the major functionalities of the Application Security Ingress Controller: 
 
@@ -124,15 +151,15 @@ To get the verbose output, add --debug option for all the Helm commands.
 
 ## Check the installation
 
-    helm history -n Application Security-ingress first-release
+    helm history -n Application-Security-ingress first-release
     
-    kubectl get -n Application Security-ingress deployments
+    kubectl get -n Application-Security-ingress deployments
     
-    kubectl get -n Application Security-ingress pods
+    kubectl get -n Application-Security-ingress pods
 
-Check the log of the Application Security Ingress Controller.
+Check the log of the Application-Security Ingress Controller.
 
-    kubectl logs -n Application Security-ingress -f [pod name]
+    kubectl logs -n Application-Security-ingress -f [pod name]
  
 ## Upgrading chart
 
