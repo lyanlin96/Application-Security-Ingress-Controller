@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Node
 metadata:
-  name: fad
+  name: AS
   labels:
     topology.kubernetes.io/zone: "fake-node"
   annotations:
