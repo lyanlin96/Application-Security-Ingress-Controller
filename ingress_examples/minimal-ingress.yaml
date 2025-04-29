@@ -3,10 +3,10 @@ kind: Ingress
 metadata:
   name: minimal-ingress
   annotations: {
-    "fortiadc-ip" : "10.0.100.133",
-    "fortiadc-login" : "fad-login",
-    "fortiadc-ctrl-log" : "enable",
-    "fortiadc-vdom" : "root",
+    "application-security-ip" : "10.0.100.133",
+    "application-security-login" : "fad-login",
+    "application-security-ctrl-log" : "enable",
+    "application-security-vdom" : "root",
     "virtual-server-ip" : "172.23.133.8",
     "virtual-server-interface" : "port1",
     "virtual-server-port" : "443",
