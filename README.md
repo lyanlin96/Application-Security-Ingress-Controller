@@ -1,58 +1,55 @@
 # Application Security Ingress Controller
 🛡️ Application Security Ingress Controller
 </br>
+</br>
 Application Security Ingress Controller is an open-source Kubernetes ingress controller that combines advanced security controls with AI-powered threat detection to safeguard microservices, APIs, and web applications in cloud-native environments.
-
+</br>
 🚀 Key Features
 </br>
+</br>
 🔐 WAF Integration – Protects against OWASP Top 10 vulnerabilities (SQLi, XSS, etc.) using ModSecurity or customizable security rules
-
+</br>
 📈 Rate Limiting & Bot Management – Detects and throttles abusive or automated traffic
-
+</br>
 🌍 IP Reputation & Threat Intelligence – Real-time blocking of high-risk IPs based on global threat feeds
-
+</br>
 🧠 AI-Based Anomaly Detection – Machine learning models analyze traffic patterns to identify and block suspicious behaviors (e.g., credential stuffing, application-layer DDoS)
-
+</br>
 🤖 Adaptive Security Policies – Dynamically adjust rules and thresholds based on live traffic analysis
-
+</br>
 🧰 Plug-and-Play – Works with NGINX, Envoy, or Traefik ingress controllers
-
+</br>
 ☁️ Cloud-Native & Service Mesh Friendly – Built for Kubernetes, compatible with Istio, Linkerd, and other service meshes
-
+</br>
 🧠 How AI Enhances Security
 </br>
 Traffic Anomaly Detection: Identifies unusual request patterns without predefined signatures
-
+</br>
 Zero-Day Attack Defense: Uses behavior-based learning to detect novel attacks early
-
+</br>
 Intelligent Rate Control: Adapts rate limits based on real-time risk scoring
-
+</br>
 Self-Learning Models: Continuously improves detection accuracy with minimal manual tuning
-
+</br>
 🔧 Use Cases
 </br>
-
+</br>
 Securing public-facing APIs and web apps in production
-
+</br>
 Adding L7 security to Kubernetes ingress with minimal configuration
-
+</br>
 Integrating custom security policies into CI/CD pipelines
-
+</br>
 Blocking known botnets or abusive crawlers
-
+</br>
 Enhancing compliance posture (e.g., PCI-DSS, HIPAA)
-
+</br>
 📦 Architecture
 </br>
 
 The controller intercepts ingress traffic at L7 (HTTP/S), applies user-defined or default security policies, and forwards only clean traffic to backend services. It supports both inline and sidecar deployment modes.
 Below content is the basic know-how and quick start for an Application Security Ingress Controller.
-
-
 </br>
-</br>
-</br>
-
 
 The Application Security Ingress Controller fulfills the Kubernetes Ingress resources and allows you to manage Application Security objects from Kubernetes. It is deployed in a container of a pod in a Kubernetes cluster. The list below outlines the major functionalities of the Application Security Ingress Controller: 
 
