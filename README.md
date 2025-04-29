@@ -21,7 +21,9 @@ Application Security Ingress Controller is an open-source Kubernetes ingress con
 </br>
 ☁️ Cloud-Native & Service Mesh Friendly – Built for Kubernetes, compatible with Istio, Linkerd, and other service meshes
 </br>
+</br>
 🧠 How AI Enhances Security
+</br>
 </br>
 Traffic Anomaly Detection: Identifies unusual request patterns without predefined signatures
 </br>
@@ -30,6 +32,7 @@ Zero-Day Attack Defense: Uses behavior-based learning to detect novel attacks ea
 Intelligent Rate Control: Adapts rate limits based on real-time risk scoring
 </br>
 Self-Learning Models: Continuously improves detection accuracy with minimal manual tuning
+</br>
 </br>
 🔧 Use Cases
 </br>
