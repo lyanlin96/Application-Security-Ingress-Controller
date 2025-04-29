@@ -57,13 +57,13 @@ The Application Security Ingress Controller fulfills the Kubernetes Ingress reso
  - To handle Add/Update/Delete events for watched Ingress resources and automatically implement corresponding actions on Application Security.
  
  
- ![Ingress](https://github.com/fortinet/fortiadc-ingress/blob/main/figures/ingress.png?raw=true)
+
 
 Ingress is a Kubernetes object that manages the external access to services in a Kubernetes cluster (typically HTTP/HTTPS). Ingress may provide load-balancing, SSL termination and name-based virtual hosting.
 
 The Application Security Ingress Controller combines the capabilities of an Ingress resource with the Ingress-managed load balancer, Application Security. 
 
-Application Security, as the Ingress-managed load balancer, not only provides flexibility in load-balancing, but also guarantees more security with features such as the Web Application Firewall (WAF), Antivirus Scanning, and Denial of Service (DoS) prevention to protect the web server resources in the Kubernetes cluster. Other features such as health check, traffic log management, and FortiView on Application Security facilitates the management of the Kubernetes ingress resources.
+Application Security, as the Ingress-managed load balancer, not only provides flexibility in load-balancing, but also guarantees more security with features such as the Web Application Firewall (WAF), Antivirus Scanning, and Denial of Service (DoS) prevention to protect the web server resources in the Kubernetes cluster. Other features such as health check, traffic log management, and view on Application Security facilitates the management of the Kubernetes ingress resources.
 
 ## Supported Release and Version
 
@@ -148,7 +148,7 @@ The Kubernetes objects required for the Application Security Ingress Controller 
 | Service Account | The service account is used in the Application Security Ingress Controller. |
 | Cluster Role | A cluster role defines the permission on the Kubernetes cluster-scoped Ingress-related objects |
 | Cluster Role Binding |The cluster role is bound to the service account used for the Application Security Ingress Controller, allowing the Application Security Ingress Controller to access and operate the Kubernetes cluster-scoped Ingress-related objects. |
-| Ingress Class |The IngressClass "fadc-ingress-controller" is created for the Application Security Ingress Controller to identify the Ingress resource. If the Ingress is defined with the IngressClass "fadc-ingress-controller", the Application Security Ingress Controller will manage this Ingress resource. |
+| Ingress Class |The IngressClass "application-security-ingress-controller" is created for the Application Security Ingress Controller to identify the Ingress resource. If the Ingress is defined with the IngressClass "as-ingress-controller", the Application Security Ingress Controller will manage this Ingress resource. |
 
 To get the verbose output, add --debug option for all the Helm commands.
 
@@ -161,7 +161,7 @@ To get the verbose output, add --debug option for all the Helm commands.
 
 ## Install Application Security Ingress Controller
 
-    helm install first-release --namespace Application Security-ingress --create-namespace --wait Application Security-ingress-controller/fadc-k8s-ctrl
+    helm install first-release --namespace Application Security-ingress --create-namespace --wait Application Security-ingress-controller/as-k8s-ctrl
 
 ## Check the installation
 
@@ -178,7 +178,7 @@ Check the log of the Application-Security Ingress Controller.
 ## Upgrading chart
 
     helm repo update
-    helm upgrade --reset-values -n Application Security-ingress first-release Application Security-ingress-controller/fadc-k8s-ctrl
+    helm upgrade --reset-values -n Application Security-ingress first-release Application Security-ingress-controller/as-k8s-ctrl
 
 ## Uninstall Chart
 
@@ -191,9 +191,9 @@ As shown in above figure, the Application Security Ingress Controller satisfies 
 
 To preserve the authentication securely on the Kubernetes cluster, you can save it with the Kubernetes secret. For example
 
-    kubectl create secret generic fad-login -n [namespace] --from-literal=username=admin --from-literal=password=[admin password]
+    kubectl create secret generic as-login -n [namespace] --from-literal=username=admin --from-literal=password=[admin password]
 
-The secret is named fad-login. This value will be specified in the Ingress annotation "Application Security-login" for the Application Security Ingress Controller to get permission access on the Application Security.
+The secret is named as-login. This value will be specified in the Ingress annotation "Application Security-login" for the Application Security Ingress Controller to get permission access on the Application Security.
 
 :warning:  The namespace of the authentication secret must be the same as the Ingress which references this authentication secret.
 
@@ -244,7 +244,7 @@ Configuration parameters are required to be specified in the Ingress annotation 
 
 # Deployment of a Simple-fanout Ingress Example
 
-![Simple-fanout example](https://github.com/fortinet/fortiadc-ingress/blob/main/figures/simple-fanout.png?raw=true)
+
 
 In this example, the client can access service1 with the URL https://test.com/info and access service2 with the
 URL https://test.com/hello.
@@ -256,17 +256,17 @@ Services are deployed under the namespace default.
 
 Service1:
 
-    kubectl apply -f https://raw.githubusercontent.com/fortinet/fortiadc-ingress/main/service_examples/service1.yaml
+    kubectl apply -f https://raw.githubusercontent.com/application-security-ingress/main/service_examples/service1.yaml
 Service2:
 
-    kubectl apply -f https://raw.githubusercontent.com/fortinet/fortiadc-ingress/main/service_examples/service2.yaml
+    kubectl apply -f https://raw.githubusercontent.com/application-security-ingress/main/service_examples/service2.yaml
 
 ## Deploy the Ingress
 
 Download the simple-fanout-example.yaml
 
 
-    curl -k https://raw.githubusercontent.com/fortinet/fortiadc-ingress/main/ingress_examples/simple-fanout-example.yaml -o simple-fanout-example.yaml
+    curl -k https://raw.githubusercontent.com/application-security-ingress/main/ingress_examples/simple-fanout-example.yaml -o simple-fanout-example.yaml
 
 Modify the Ingress Annotation in simple-fanout-example.yaml to accommodate to your environment, ex: Application Security-ip, virtual-server-ip, etc.. Then deploy the ingress with kubectl command
 
@@ -274,15 +274,6 @@ Modify the Ingress Annotation in simple-fanout-example.yaml to accommodate to yo
 
 
 
-Check the deployed Ingress with FortiView
 
-![fortiview_topology](https://github.com/fortinet/fortiadc-ingress/blob/main/figures/fortiview_topology.png?raw=true)
 
-Try to access https://test.com/info.
-
-![test_info](https://github.com/fortinet/fortiadc-ingress/blob/main/figures/test_info.png?raw=true)
-
-Try to access https://test.com/hello.
-
-![nginx-demo](https://github.com/fortinet/fortiadc-ingress/blob/main/figures/nginx-demo.png?raw=true)
 
