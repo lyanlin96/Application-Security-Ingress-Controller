@@ -3,9 +3,9 @@ kind: Ingress
 metadata:
   name: name-virtual-host-ingress
   annotations: {
-    "fortiadc-ip" : "10.0.100.133",
-    "fortiadc-login" : "fad-login",
-    "fortiadc-vdom" : "root",
+    "application-security-ip" : "10.0.100.133",
+    "application-security-login" : "fad-login",
+    "application-security-vdom" : "root",
     "virtual-server-ip" : "2001:db8::68",
     "virtual-server-interface" : "port1",
     "virtual-server-addr-type" : "ipv6"
